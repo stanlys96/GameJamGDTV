@@ -60,27 +60,34 @@
     <Compile Include="Assets\Scripts\Collectable.cs" />
     <Compile Include="Assets\Scripts\Crate.cs" />
     <Compile Include="Assets\Scripts\CameraMotor.cs" />
+    <Compile Include="Assets\Scripts\PersistentObjectSpawner.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\CharacterMenu.cs" />
     <Compile Include="Assets\Scripts\Portal.cs" />
     <Compile Include="Assets\Scripts\GateTrigger.cs" />
     <Compile Include="Assets\Scripts\FloatingTextManager.cs" />
+    <Compile Include="Assets\Scripts\Saving\SaveableEntity.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\PowerPlayerCounter.cs" />
     <Compile Include="Assets\Scripts\NPCTextPerson.cs" />
     <Compile Include="Assets\Scripts\Fighter.cs" />
     <Compile Include="Assets\Scripts\EnemyHitbox.cs" />
     <Compile Include="Assets\Scripts\Weapon.cs" />
     <Compile Include="Assets\Scripts\EnemyHealthDisplay.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Pickup.cs" />
     <Compile Include="Assets\Scripts\Boss.cs" />
+    <Compile Include="Assets\Scripts\Saving\ISaveable.cs" />
+    <Compile Include="Assets\Scripts\Saving\SerializableVector3.cs" />
     <Compile Include="Assets\Scripts\CameraFacing.cs" />
+    <Compile Include="Assets\Scripts\SavingWrapper.cs" />
     <Compile Include="Assets\Scripts\HealingFountain.cs" />
+    <Compile Include="Assets\Scripts\Saving\SavingSystem.cs" />
     <Compile Include="Assets\Scripts\Chest.cs" />
     <Compile Include="Assets\Scripts\Damage.cs" />
     <Compile Include="Assets\Scripts\DontDestroy.cs" />
     <Compile Include="Assets\Scripts\FloatingText.cs" />
     <Compile Include="Assets\Scripts\Collidable.cs" />
-    <Compile Include="Assets\Scripts\PlayerHeart.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

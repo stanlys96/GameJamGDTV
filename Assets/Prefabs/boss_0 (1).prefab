@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3896889491478576819}
   - component: {fileID: 3896889491478576818}
   - component: {fileID: 1559552167953892908}
+  - component: {fileID: 4140887909863371625}
   m_Layer: 7
   m_Name: boss_0 (1)
   m_TagString: Fighter
@@ -121,14 +122,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoint: 10
+  normalMaxHitpoint: 10
   maxHitpoint: 10
   pushRecoverySpeed: 0.2
+  powerPlayerMaxHitpoint: 60
   ySpeed: 0.75
   xSpeed: 1
   rigidBody: {fileID: 3896889491478576819}
+  healthBar: {fileID: 0}
   xpValue: 1
   triggerLength: 1
   chaseLength: 5
+  animator: {fileID: 0}
+  dropOnDead: {fileID: 0}
   filter:
     useTriggers: 0
     useLayerMask: 0
@@ -208,6 +214,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthUI: {fileID: 4169925739523691730}
+--- !u!114 &4140887909863371625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896889491478576822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1 &3896889492683248334
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,13 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using RPG.Saving;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
     public static GameManager instance;
 
     private void Awake()
     {
+        savingWrapper = FindObjectOfType<SavingWrapper>();
         if (GameManager.instance != null) {
             Destroy(gameObject);
             Destroy(player.gameObject);
@@ -18,10 +22,7 @@ public class GameManager : MonoBehaviour
             Destroy(menu);
             return;
         }
-
         instance = this;
-        SceneManager.sceneLoaded += LoadState;
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     public List<Sprite> playerSprites;
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
     public Sprite powerPlayerSprite;
     public RuntimeAnimatorController powerPlayerAnimatorController;
     public GameObject livesContainer;
+    public SavingWrapper savingWrapper;
 
     // References
     public Player player;
@@ -41,9 +43,14 @@ public class GameManager : MonoBehaviour
     public int experience;
     public RectTransform hitpointBar;
     public Animator deathMenuAnim;
+    public Animator winMenuAnim;
     public GameObject hud;
     public GameObject menu;
+    public GameObject winMenu;
+    public GameObject deathMenu;
     public int playerLives = 3;
+    public bool alreadyLoad = false;
+    private int asd = 0;
 
     // Floating text
     public void ShowText(string msg, int fontSize, Color color, Vector3 position, Vector3 motion, float duration)
@@ -132,97 +139,71 @@ public class GameManager : MonoBehaviour
         OnHitpointChange();
     }
 
-    // Save state
-    // INT preferred skin
-    // INT pesos
-    // INT experience
-    // INT weaponLevel
-
-    // On Scene Loaded
-    public void OnSceneLoaded(Scene s, LoadSceneMode mode)
+    public void Save()
     {
-        string[] data = PlayerPrefs.GetString("SaveState").Split('|');
-        if (data.Length > 1)
+        savingWrapper.Save();
+    }
+
+    public void Load()
+    {
+        savingWrapper.Load();
+    }
+
+    public void Delete()
+    {
+        player.BeNormalPlayer();
+        player.powerPlayerCounter = Mathf.Infinity;
+        savingWrapper = FindObjectOfType<SavingWrapper>();
+        savingWrapper.Delete();
+        SceneManager.LoadScene("Main");
+        deathMenuAnim.SetTrigger("Hide");
+        player.transform.position = GameObject.Find("SpawnPoint").transform.position;
+        pesos = 0;
+        experience = 0;
+        playerLives = 3;
+        player.Respawn();
+        weapon.weaponLevel = 0;
+        for (int i = 0; i < livesContainer.transform.childCount; i++)
         {
-            string updateTransformData = data[4].Replace("(", "");
-            string anotherUpdateTransformData = updateTransformData.Replace(")", "");
-            string[] splitted = anotherUpdateTransformData.Split(',');
-
-            player.savedPosition = new Vector2(float.Parse(splitted[0].Trim()), float.Parse(splitted[1].Trim()));
-            player.savedScene = data[5];
-
-            if (player.savedScene == SceneManager.GetActiveScene().name && (player.savedPosition != null))
-            {
-                player.transform.position = player.savedPosition;
-            }
-            else
-            {
-                player.transform.position = GameObject.Find("SpawnPoint").transform.position;
-            }
+            livesContainer.transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
     // Death Menu and Respawn
     public void Respawn()
     {
+        player.BeNormalPlayer();
+        player.powerPlayerCounter = Mathf.Infinity;
+        savingWrapper = FindObjectOfType<SavingWrapper>();
+        savingWrapper.Load();
         deathMenuAnim.SetTrigger("Hide");
-        SceneManager.LoadScene("Main");
+        player.transform.position = GameObject.Find("SpawnPoint").transform.position;
+        pesos = 0;
+        experience = 0;
+        playerLives = 3;
         player.Respawn();
-    }
-
-    public void SaveGame()
-    {
-        string s = "";
-        player.savedPosition = player.transform.position;
-        player.savedScene = SceneManager.GetActiveScene().name;
-
-        s += "0" + "|";
-        s += pesos.ToString() + "|";
-        s += experience.ToString() + "|";
-        s += weapon.weaponLevel.ToString() + "|";
-        s += player.savedPosition.ToString() + "|";
-        s += player.savedScene;
-
-        PlayerPrefs.SetString("SaveState", s);
-    }
-
-    // Load state
-    public void LoadState(Scene s, LoadSceneMode mode)
-    {
-        SceneManager.sceneLoaded -= LoadState;
-
-        if (!PlayerPrefs.HasKey("SaveState")) return;
-        string[] data = PlayerPrefs.GetString("SaveState").Split('|');
-
-        SceneManager.LoadScene(data[5]);
-
-        // Change player skin
-        pesos = int.Parse(data[1]);
-
-        // Experience
-        experience = int.Parse(data[2]);
-        if (GetCurrentLevel() != 1)
+        for (int i = 0; i < livesContainer.transform.childCount; i++)
         {
-            player.SetLevel(GetCurrentLevel());
+            livesContainer.transform.GetChild(i).gameObject.SetActive(true);
         }
-
-        string updateTransformData = data[4].Replace("(", "");
-        string anotherUpdateTransformData = updateTransformData.Replace(")", "");
-        string[] splitted = anotherUpdateTransformData.Split(',');
-
-        // Change the weapon level
-        weapon.SetWeaponLevel(int.Parse(data[3]));
-        player.transform.position = new Vector2(float.Parse(splitted[0].Trim()), float.Parse(splitted[1].Trim()));
     }
 
-    public void DeleteState()
+    public void RestartGame()
     {
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
+        player.BeNormalPlayer();
+        savingWrapper = FindObjectOfType<SavingWrapper>();
+        savingWrapper.Delete();
+        winMenuAnim.SetTrigger("Hide");
         SceneManager.LoadScene("Main");
         player.transform.position = GameObject.Find("SpawnPoint").transform.position;
         pesos = 0;
         experience = 0;
+        playerLives = 3;
         player.Respawn();
+        for (int i = 0; i < livesContainer.transform.childCount; i++)
+        {
+            livesContainer.transform.GetChild(i).gameObject.SetActive(true);
+        }
+        alreadyLoad = true;
     }
 }

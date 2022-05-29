@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: 3233069646603002034}
   - component: {fileID: 3233069646603002032}
   - component: {fileID: 8254378270763906147}
+  - component: {fileID: 1978826081471294837}
   m_Layer: 7
   m_Name: minion_0
   m_TagString: Fighter
@@ -330,14 +331,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitpoint: 10
+  normalMaxHitpoint: 10
   maxHitpoint: 10
   pushRecoverySpeed: 0.2
+  powerPlayerMaxHitpoint: 60
   ySpeed: 0.75
   xSpeed: 1
   rigidBody: {fileID: 3233069646603002034}
+  healthBar: {fileID: 0}
   xpValue: 1
   triggerLength: 1
   chaseLength: 2
+  animator: {fileID: 0}
+  dropOnDead: {fileID: 0}
   filter:
     useTriggers: 0
     useLayerMask: 0
@@ -365,6 +371,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthUI: {fileID: 6599008938519533618}
+--- !u!114 &1978826081471294837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233069646603002038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1 &4379720915711334043
 GameObject:
   m_ObjectHideFlags: 0

@@ -85,5 +85,5 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   sceneNames:
-  - Dungeon1
   - Main
+  cooldown: 4

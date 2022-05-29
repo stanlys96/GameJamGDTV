@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2014018485013172940}
   - component: {fileID: 2014018485013172930}
   - component: {fileID: 331587252}
+  - component: {fileID: 6105476696431268601}
   m_Layer: 7
   m_Name: Player
   m_TagString: Fighter
@@ -64,6 +65,7 @@ MonoBehaviour:
   animator: {fileID: 2014018484664008645}
   savedPosition: {x: 0, y: 0}
   savedScene: Main
+  powerPlayerCounter: Infinity
 --- !u!114 &2014018485013172943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +138,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2014018485013172936}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c35cad672cb3f1e4c9ba609add61fd78, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -169,10 +171,10 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Material: {fileID: 6200000, guid: c35cad672cb3f1e4c9ba609add61fd78, type: 2}
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!70 &331587252
 CapsuleCollider2D:
@@ -183,13 +185,26 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 2014018485013172936}
   m_Enabled: 0
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c35cad672cb3f1e4c9ba609add61fd78, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.022964776, y: 0.0061559677}
   m_Size: {x: 0.16607535, y: 0.28612}
   m_Direction: 0
+--- !u!114 &6105476696431268601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014018485013172936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: player
 --- !u!1 &2014018485912901178
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +299,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2014018485912901178}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: c35cad672cb3f1e4c9ba609add61fd78, type: 2}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
