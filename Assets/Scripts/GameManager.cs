@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.instance.PlayLevelMusic();
+        levelMusic.Play();
+        //AudioManager.instance.PlayLevelMusic();
     }
 
     public List<Sprite> playerSprites;
@@ -53,6 +54,7 @@ public class GameManager : MonoBehaviour
     public GameObject menu;
     public GameObject winMenu;
     public GameObject deathMenu;
+    public AudioSource levelMusic;
     public int playerLives = 3;
     public bool alreadyLoad = false;
     private int asd = 0;

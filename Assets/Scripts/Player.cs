@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Saving;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Player : Mover, ISaveable
 {
@@ -30,10 +31,12 @@ public class Player : Mover, ISaveable
     private float timeSinceLastPowerPlayer = Mathf.Infinity;
     private float powerPlayerDuration = 15f;
     private bool alreadySetRespawn = false;
-    private float weaponCooldown = 1.0f;
+    private float weaponCooldown = 0.75f;
     private float cooldown = 4.0f;
     private float lastShout = -4.0f;
     public float powerPlayerCounter = Mathf.Infinity;
+    public UnityEvent onHit;
+    public UnityEvent onLose;
 
     protected override void Start()
     {
@@ -53,6 +56,7 @@ public class Player : Mover, ISaveable
         if (GameManager.instance.playerLives == 0)
         {
             GameManager.instance.deathMenuAnim.SetTrigger("Show");
+            onLose.Invoke();
             return;
         }
         BePowerPlayer();
@@ -124,6 +128,8 @@ public class Player : Mover, ISaveable
 
     private void Swing()
     {
+        if (hitpoint <= 0) return;
+        onHit.Invoke();
         animator.SetTrigger("Swing");
     }
 

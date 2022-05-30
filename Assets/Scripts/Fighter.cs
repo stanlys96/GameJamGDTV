@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Fighter : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class Fighter : MonoBehaviour
     public int maxHitpoint = 10;
     public float pushRecoverySpeed = 0.2f;
     public int powerPlayerMaxHitpoint = 60;
+    public UnityEvent onReceiveDamage;
 
     // Immunity
-    protected float immuneTime = 1f;
+    public float immuneTime = 0.75f;
     protected float lastImmune;
 
     // Push
@@ -30,6 +32,14 @@ public class Fighter : MonoBehaviour
             {
                 hitpoint = 0;
                 Death();
+            }
+            if (gameObject.name == "Player")
+            {
+                if (onReceiveDamage != null)
+                {
+                    if (GameManager.instance.player.hitpoint <= 0) return;
+                    onReceiveDamage.Invoke();
+                }
             }
         }
     }
