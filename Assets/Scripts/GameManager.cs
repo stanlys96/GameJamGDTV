@@ -25,6 +25,11 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        AudioManager.instance.PlayLevelMusic();
+    }
+
     public List<Sprite> playerSprites;
     public List<Sprite> weaponSprites;
     public List<RuntimeAnimatorController> playerAnimators;
