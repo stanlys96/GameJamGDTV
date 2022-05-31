@@ -62,6 +62,7 @@ public class Enemy : Mover, ISaveable
                 }
                 else
                 {
+                    UpdateMotor(new Vector3(0, 0, 0), animator);
                     animator.SetFloat("speed", 0f);
                 }
             }
